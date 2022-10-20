@@ -1,22 +1,17 @@
-import 'dart:html';
-import 'dart:ui';
-
-import 'package:flutter/material.dart';
-import 'package:acara_20/home.dart';
+import 'package:acara_20/dashboard.dart';
+import 'package:acara_20/main.dart';
 import 'package:acara_20/profile.dart';
 import 'package:acara_20/setting.dart';
+import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
-  State<MyApp> createState() => _MyAppState();
+  _HomeState createState() => _HomeState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _HomeState extends State<Home> {
   int index = 0;
-  List <Widget> list = [Home(), Profile(), Settings()];
-
+  List<Widget> list = [Dashboard(), Profile(), Settings()];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,12 +21,14 @@ class _MyAppState extends State<MyApp> {
           title: Text("Navigation Drawer"),
         ),
         body: list[index],
-        drawer: MyDrawer (onTap: (ctx, i){
-          setState(() {
-            index=i;
-            Navigator.pop(ctx);
-          });
-        },),
+        drawer: MyDrawer(
+          onTap: (ctx, i) {
+            setState(() {
+              index = i;
+              Navigator.pop(ctx);
+            });
+          },
+        ),
       ),
     );
   }
@@ -40,7 +37,6 @@ class _MyAppState extends State<MyApp> {
 class MyDrawer extends StatelessWidget {
   final Function onTap;
   MyDrawer({required this.onTap});
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -52,30 +48,30 @@ class MyDrawer extends StatelessWidget {
             DrawerHeader(
               decoration: BoxDecoration(color: Colors.blue),
               child: Padding(
-              padding: EdgeInsets.all(6),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Container(
-                    width: 60,
-                    height: 60,
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage('image/nia.png'),
+                padding: EdgeInsets.all(6),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Container(
+                      width: 60,
+                      height: 60,
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage('image/nia.png'),
                       ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    "Siti Hannaniyah S",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color:Colors.white),
-                  ),
-                  SizedBox(
-                    height: 3,
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      "Siti Hannaniyah S",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
+                    ),
+                    SizedBox(
+                      height: 3,
                     ),
                     Text(
                       "naniania05@gmail.com",
@@ -100,12 +96,17 @@ class MyDrawer extends StatelessWidget {
               title: Text("Settings"),
               onTap: () => onTap(context, 2),
             ),
-            Divider(height: 1,),
+            Divider(
+              height: 1,
+            ),
             ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text("Logout"),
-              onTap: () => onTap(context, 0),),
+              onTap: () => onTap(context, 0),
+            ),
           ],
-        ),),);
+        ),
+      ),
+    );
   }
 }
